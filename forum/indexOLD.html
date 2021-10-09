@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>GHF Forums</title>
+        <link rel="stylesheet" href="index.html.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="top">
+            <div id="logo">GHF</div>
+            <div id="logo-name">GHF Studios Development</div>
+            <div id="image">
+                  <img src="/sunset_dive[2K].jpg" alt="Some Background Picture">
+              </div>
+          </div>
+        <div class="main">
+            <ol>
+            </ol>
+        </div>
+        <script src="data.js"></script>
+        <script>
+            console.log(threads);
+            var container = document.querySelector('ol');
+            for (let thread of threads) {
+                var html = `
+                <li class="row">
+                    <a href="thread.html?${thread.id}">
+                        <h4 class="title">
+                            ${thread.title}
+                        </h4>
+                        <div class="bottom">
+                            <p class="timestamp">
+                                ${new Date(thread.date).toLocaleString()}
+                            </p>
+                            <p class="comment-count">
+                                ${thread.comments.length} comments
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                `
+                container.insertAdjacentHTML('beforeend', html);
+    
+                
+            }
+    
+            var btn = document.querySelector('button');
+            btn.addEventListener('click', function() {
+                var txt = document.querySelector('textarea');
+                var comment = {
+                    content: txt.value,
+                    date: Date.now(),
+                    author: 'Aaron'
+                }
+                addComment(comment);
+                txt.value = '';
+                thread.comments.push(comment);
+                localStorage.setItem('threads', JSON.stringify(threads));
+            })
+        </script>
+        <style>
+            body {
+                margin: 10px 60px;
+                font-family: Arial, Helvetica, sans-serif;
+                background: #2c3e50;
+                color: #ecf0f1;
+                line-height: 1.618em;
+            }
+
+            #top {
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            #logo{
+                color: white;
+                background-color: rgb(65, 116, 94);
+                display: inline-block;
+                font-size: 32px;
+                font-weight: bold;
+                font-family: 'Roboto', sans-serif;
+                padding: 8px;
+                margin-top: 16px;
+            }
+
+            #logo-name {
+                font-size: 32px;
+                font-weight: bold;
+                margin: 16px;
+            }
+            
+            #main {
+                max-width: 800px;
+                margin: auto;
+            }
+
+            a {
+                text-decoration: none;
+                color: black;
+            }
+
+            h1, h4, ol {
+                margin: 0;
+            }
+
+            p {
+                margin: 5px 0;
+            }
+
+            .main {
+                background-color: #F6F6EF;
+                padding: 10px 15px;
+            }
+
+            .row {
+                padding: 5px 0;
+            }
+
+            .bottom {
+                display: flex;
+                color: grey;
+                font-size: 12px;
+            }
+
+            .timestamp {
+                padding-right: 10px;
+            }
+        </style>
+    </body>
+</html>
